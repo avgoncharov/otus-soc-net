@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Otus.AG.Domain.Services;
+using Otus.AG.Infra.DAL.MySql;
 using OtusSocialNetwork.Stubs;
 
 namespace OtusSocialNetwork
@@ -20,8 +21,10 @@ namespace OtusSocialNetwork
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddHealthChecks();
+			services.AddMySqlDAL()
+				.AddStubAgServices();
+			
 			services.AddControllers();
-			services.AddSingleton<IUsersServices, UsersServicesStub>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

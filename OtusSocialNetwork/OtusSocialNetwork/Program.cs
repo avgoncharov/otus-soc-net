@@ -13,6 +13,7 @@ namespace OtusSocialNetwork
 	{
 		public static void Main(string[] args)
 		{
+			//var cnt = "server=localhost;user=root;database=otus_soc_net;password=Qwe!123!ewQ;";
 			CreateHostBuilder(args).Build().Run();
 		}
 

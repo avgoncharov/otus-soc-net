@@ -12,6 +12,12 @@
     <ItemGroup>
       <ProjectReference Include="..\Domain\Otus.AG.Domain.Models\Otus.AG.Domain.Models.csproj" />
       <ProjectReference Include="..\Domain\Otus.AG.Domain.Services\Otus.AG.Domain.Services.csproj" />
+      <ProjectReference Include="..\Infra\DAL\Otus.AG.Infra.DAL.MySql\Otus.AG.Infra.DAL.MySql.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+      <PackageReference Include="System.Management" Version="4.5.0" />
     </ItemGroup>
 
 </Project>

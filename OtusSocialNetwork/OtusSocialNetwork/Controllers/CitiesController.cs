@@ -8,24 +8,54 @@ using Otus.AG.Domain.Services;
 namespace OtusSocialNetwork.Controllers
 {
 	[ApiController]
-	[Route("api/v1/Cities")]
+	[Route("api/v1/cities")]
 	public class CitiesController: ControllerBase
 	{
-		private readonly ICitiesService _citiesService;
-		private readonly ILogger _logger;
-		
-		public CitiesController(ICitiesService citiesService, ILoggerFactory logger)
+		public CitiesController(IUnitOfWorkFactory unitOfWorkFactory, ILoggerFactory logger)
 		{
-			_citiesService = citiesService ?? throw new ArgumentNullException(nameof(citiesService));
+			_unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
 			_logger = logger.CreateLogger("Default");
 		}
-
-		[HttpGet("{template}/{pn}")]
+		
+		
+		[HttpGet("by-template/{template}/{pn}")]
 		public async Task<IActionResult> GetAsync(string template, int pn, CancellationToken token)
 		{
-			var result = await _citiesService.GetCitiesAsync(template, 100, pn, token)
+			await using var uow = await _unitOfWorkFactory.CreateAsync(token).ConfigureAwait(false);
+			
+			var result = await uow.CitiesRepository.GetCitiesAsync(template, 100, pn, token)
 				.ConfigureAwait(false);
+			
 			return Ok(result);
 		}
+		
+		
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetAsync(Guid id, CancellationToken token)
+		{
+			await using var uow = await _unitOfWorkFactory.CreateAsync(token).ConfigureAwait(false);
+			
+			var result = await uow.CitiesRepository.GetCityByIdAsync(id, token)
+				.ConfigureAwait(false);
+
+			return result != null ? Ok(result): NotFound() as IActionResult;
+		}
+		
+		
+		[HttpGet("by-name/{name}")]
+		public async Task<IActionResult> GetAsync(string name, CancellationToken token)
+		{
+			await using var uow = await _unitOfWorkFactory.CreateAsync(token).ConfigureAwait(false);
+			
+			var result = await uow.CitiesRepository.GetCityByNameIdAsync(name, token)
+				.ConfigureAwait(false);
+
+			return result != null ? Ok(result): NotFound() as IActionResult;
+		}
+		
+		
+		private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+		private readonly ILogger _logger;
+
 	}
 }

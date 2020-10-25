@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Otus.AG.Domain.Models
 {
-	public sealed class User: IEntity
+	public class User: IEntity
 	{
 		public Guid Id { get; }
 
@@ -17,6 +17,8 @@ namespace Otus.AG.Domain.Models
 		public City City { get; }
 		public IReadOnlyCollection<User> Friends { get; }
 
+		public UserType UserType { get; }
+
 		public User(
 			Guid id,
 			Guid imageId,
@@ -26,7 +28,8 @@ namespace Otus.AG.Domain.Models
 			Gender gender,
 			IReadOnlyCollection<string> interests,
 			City city,
-			IReadOnlyCollection<User> friends)
+			IReadOnlyCollection<User> friends,
+			UserType userType = UserType.Common)
 		{
 			Id = id;
 			ImageId = imageId;
@@ -39,5 +42,19 @@ namespace Otus.AG.Domain.Models
 			Friends = friends;
 		}
 
+
+
+		public static  User More { get; } =
+			new User(
+				Guid.Empty,
+				Guid.Empty,
+				"...",
+				"...",
+				DateTime.MinValue,
+				Gender.Male,
+				null,
+				null,
+				null,
+				UserType.More);
 	}
 }

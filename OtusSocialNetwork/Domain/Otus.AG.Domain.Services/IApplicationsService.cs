@@ -7,7 +7,7 @@ namespace Otus.AG.Domain.Services
 {
 	public interface IApplicationsService
 	{
-		public Task SendApplicationAsync(Guid senderId, Guid receiverId,CancellationToken token);
+		public Task RegisterApplicationAsync(Guid senderId, Guid receiverId,CancellationToken token);
 		
 		
 		public Task<Page<Application>> GetApplicationsAsync(
@@ -17,6 +17,15 @@ namespace Otus.AG.Domain.Services
 			CancellationToken token);
 		
 		
-		public Task AcceptApplicationAsync(Guid receiverId, Guid applicationId,CancellationToken token);
+		public Task AcceptApplicationAsync(
+			Guid receiverId,
+			Guid applicationId,
+			CancellationToken token);
+		
+		
+		public Task DeclineApplicationAsync(
+			Guid receiverId,
+			Guid applicationId,
+			CancellationToken token);
 	}
 }
