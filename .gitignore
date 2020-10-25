@@ -1,8 +1,4 @@
 ﻿OtusSocialNetwork/.idea
-OtusSocialNetwork/OtusSocialNetwork/bin
-OtusSocialNetwork/OtusSocialNetwork/obj
+bin/
+obj/
 OtusSocialNetwork/OtusSocialNetwork/publish
-OtusSocialNetwork/Domain/Otus.AG.Domain.Models/bin
-OtusSocialNetwork/Domain/Otus.AG.Domain.Models/obj
-OtusSocialNetwork/Domain/Otus.AG.Domain.Services/bin
-OtusSocialNetwork/Domain/Otus.AG.Domain.Services/obj
