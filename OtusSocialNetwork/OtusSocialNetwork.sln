@@ -2,6 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtusSocialNetwork", "OtusSocialNetwork\OtusSocialNetwork.csproj", "{0A0158D9-0096-42A5-8D08-FB086B2A857B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BL", "BL", "{BAD9081B-4025-4940-9A1E-B930EEC81FB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{803AA9DD-377D-47F8-AA13-15BFC0570F53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B14D5D1E-9A8B-4BF5-854E-81531441A481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.AG.Domain.Models", "Domain\Otus.AG.Domain.Models\Otus.AG.Domain.Models.csproj", "{B26B98C4-D5A9-42C4-8090-5D5AB7855914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.AG.Domain.Services", "Domain\Otus.AG.Domain.Services\Otus.AG.Domain.Services.csproj", "{DD26722B-684D-454D-B64F-5AA3D1251823}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +22,17 @@ Global
 		{0A0158D9-0096-42A5-8D08-FB086B2A857B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A0158D9-0096-42A5-8D08-FB086B2A857B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A0158D9-0096-42A5-8D08-FB086B2A857B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B26B98C4-D5A9-42C4-8090-5D5AB7855914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26B98C4-D5A9-42C4-8090-5D5AB7855914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26B98C4-D5A9-42C4-8090-5D5AB7855914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26B98C4-D5A9-42C4-8090-5D5AB7855914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD26722B-684D-454D-B64F-5AA3D1251823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD26722B-684D-454D-B64F-5AA3D1251823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD26722B-684D-454D-B64F-5AA3D1251823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD26722B-684D-454D-B64F-5AA3D1251823}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B26B98C4-D5A9-42C4-8090-5D5AB7855914} = {B14D5D1E-9A8B-4BF5-854E-81531441A481}
+		{DD26722B-684D-454D-B64F-5AA3D1251823} = {B14D5D1E-9A8B-4BF5-854E-81531441A481}
 	EndGlobalSection
 EndGlobal

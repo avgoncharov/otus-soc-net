@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Otus.AG.Domain.Services;
+using OtusSocialNetwork.Stubs;
 
 namespace OtusSocialNetwork
 {
@@ -16,7 +19,9 @@ namespace OtusSocialNetwork
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddHealthChecks();
 			services.AddControllers();
+			services.AddSingleton<IUsersServices, UsersServicesStub>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,11 +33,15 @@ namespace OtusSocialNetwork
 			}
 
 			app.UseRouting();
-			
 
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+			});
+			
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapHealthChecks("/health");
 			});
 		}
 	}
