@@ -11,8 +11,6 @@ namespace Otus.AG.Infra.DAL.MySql
 {
 	internal sealed class CitiesRepository : ICitiesRepository
 	{
-		private readonly MySqlConnection _connection;
-
 		public CitiesRepository(MySqlConnection connection)
 		{
 			_connection = connection;
@@ -93,6 +91,7 @@ namespace Otus.AG.Infra.DAL.MySql
 			return null;
 		}
 
+		
 		public async Task<City> GetCityByNameIdAsync(string name, CancellationToken token)
 		{
 			await using var cmd = _connection.CreateCommand();
@@ -113,6 +112,9 @@ namespace Otus.AG.Infra.DAL.MySql
 		}
 
 
+		private readonly MySqlConnection _connection;
+		
+		
 		private const string SelectById =
 			"select BIN_TO_UUID(id) id, name from cities where id = UUID_TO_BIN(@currId)";
 		

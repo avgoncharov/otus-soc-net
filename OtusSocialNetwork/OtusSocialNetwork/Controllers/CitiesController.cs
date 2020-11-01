@@ -1,9 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Otus.AG.Domain.Services;
+using OtusSocialNetwork.JwtPolicies;
 
 namespace OtusSocialNetwork.Controllers
 {
@@ -17,7 +19,7 @@ namespace OtusSocialNetwork.Controllers
 			_logger = logger.CreateLogger("Default");
 		}
 		
-		
+		[Authorize(Policy = Policies.User)]
 		[HttpGet("by-template/{template}/{pn}")]
 		public async Task<IActionResult> GetAsync(string template, int pn, CancellationToken token)
 		{
@@ -42,6 +44,7 @@ namespace OtusSocialNetwork.Controllers
 		}
 		
 		
+		[Authorize(Roles = "admin")]
 		[HttpGet("by-name/{name}")]
 		public async Task<IActionResult> GetAsync(string name, CancellationToken token)
 		{

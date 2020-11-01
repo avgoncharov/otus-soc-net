@@ -1,5 +1,9 @@
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
+using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
@@ -15,9 +19,31 @@ namespace Otus.AG.Infra.DAL.MySql
 			_connection = connection;
 		}
 
-		public async Task<User> CreateAsync(User user, CancellationToken token)
+		public async Task<Guid> CreateAsync(string login, string pswd, CancellationToken token)
 		{
-			throw new NotImplementedException();
+			await using var cmd = _connection.CreateCommand();
+			
+			cmd.CommandText = "Insert into log_users (id, login, pswd) value (UUID_TO_BIN(@id), @login, @pswd)";
+			cmd.CommandType = CommandType.Text;
+			var newId = Guid.NewGuid();
+			var idP = new MySqlParameter("@id", MySqlDbType.Guid) {Value = newId};
+			cmd.Parameters.Add(idP);
+			
+			var loginP = new MySqlParameter("@login", MySqlDbType.VarChar) {Value = login};
+			cmd.Parameters.Add(loginP);
+			
+			using var md5 = MD5.Create();
+			var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(pswd));
+			var pswdP = new MySqlParameter("@pswd", MySqlDbType.VarChar) {Value = Convert.ToBase64String(hash)};
+			cmd.Parameters.Add(pswdP);
+			
+			var result = await cmd.ExecuteNonQueryAsync(token).ConfigureAwait(false);
+			if (result == 1)
+			{
+				return newId;
+			}
+
+			return Guid.Empty;
 		}
 
 		public async Task<User> GetByIdAsync(Guid id, CancellationToken token)

@@ -7,5 +7,6 @@ namespace Otus.AG.Domain.Services
 		ICitiesRepository CitiesRepository { get; }
 		IUsersRepository UsersRepository { get; }
 		IApplicationsRepository ApplicationsRepository { get; }
+		IAuthRepository AuthRepository { get; }
 	}
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
@@ -14,13 +13,14 @@ namespace Otus.AG.Infra.DAL.MySql
 			CitiesRepository =  new CitiesRepository(_connection);
 			UsersRepository =  new UsersRepository(_connection);
 			ApplicationsRepository = new ApplicationsRepository(_connection);
+			AuthRepository = new AuthRepository(_connection);
 		}
 		
 		public ICitiesRepository CitiesRepository { get; }
 		public IUsersRepository UsersRepository { get; }
 		public IApplicationsRepository ApplicationsRepository { get; }
+		public IAuthRepository AuthRepository { get; }
 
-		
 		public ValueTask DisposeAsync()
 		{
 			return new ValueTask(_connection.CloseAsync(CancellationToken.None));

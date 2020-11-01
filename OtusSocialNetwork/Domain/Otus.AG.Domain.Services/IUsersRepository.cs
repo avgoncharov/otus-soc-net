@@ -8,7 +8,7 @@ namespace Otus.AG.Domain.Services
 {
 	public interface IUsersRepository
 	{
-		Task<User> CreateAsync(User user, CancellationToken token);
+		Task<Guid> CreateAsync(string login, string pswd, CancellationToken token);
 		Task<User> GetByIdAsync(Guid id, CancellationToken token);
 		Task<IReadOnlyCollection<User>> GetByFilterAsync(UsersFilter filter, CancellationToken token);
 		Task<User> UpdateAsync(User user, CancellationToken token);
